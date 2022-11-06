@@ -1,0 +1,20 @@
+name = "otentik"
+main = "src/index.ts"
+compatibility_date = "2022-11-05"
+workers_dev = true
+
+[dev]
+port = 8787
+ip = "127.0.0.1"
+local_protocol = "http"
+
+# [triggers]
+# crons = [ "1 * * * *" ]
+
+[site]
+bucket = "./public"
+
+# [[ d1_databases ]]
+# binding = "DB" # i.e. available in your Worker on env.DB
+# database_name = "otentik"
+# database_id = "UUID"
