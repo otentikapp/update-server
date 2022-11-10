@@ -15,7 +15,6 @@ router.get('/', (c) => {
     return c.json({
         error: true,
         message: 'No download available for your platform!',
-        userAgent,
         platform,
     })
 })

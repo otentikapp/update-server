@@ -1,7 +1,6 @@
 import { Hono } from 'hono'
 import { Env } from '../interface'
 import { prettyJSON } from '../middleware'
-import { getLatestRelease } from '../utils/repository'
 
 const router = new Hono<{ Bindings: Env }>()
 router.use('*', prettyJSON())

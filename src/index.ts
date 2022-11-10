@@ -4,7 +4,7 @@
 import { Hono } from 'hono'
 import { serveStatic } from 'hono/serve-static.module'
 
-import { homeHandler, tauriHandler, downloadHandler, updateHandler } from './routes'
+import { homeHandler, latestHandler, downloadHandler, updateHandler } from './routes'
 import { poweredBy, logger, cors } from './middleware'
 import { Env } from './interface'
 
@@ -23,7 +23,7 @@ app.use('*', cors())
 
 // Register app routes.
 app.route('/', homeHandler)
-app.route('/tauri', tauriHandler)
+app.route('/latest', latestHandler)
 app.route('/update', updateHandler)
 app.route('/download', downloadHandler)
 
