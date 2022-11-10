@@ -34,12 +34,14 @@ export default function Page(props: { siteData: SiteData; versionString: string;
                     <footer>
                         <div id='version'>v{props.versionString}</div>
                         <a
-                            id='release-notes'
                             href={`${constants.url.github_repo}/releases/tag/v${props.versionString}`}
+                            rel='noopener noreferrer'
+                            target='_blank'
+                            id='release-notes'
                         >
                             Release Notes
                         </a>
-                        <a id='all-releases' href='/archive'>
+                        <a href='/archive' id='all-releases'>
                             All Releases
                         </a>
                         <a href={`${constants.url.github_repo}`}>GitHub</a>

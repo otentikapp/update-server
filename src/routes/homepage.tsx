@@ -2,7 +2,7 @@
 import { Hono } from 'hono'
 import { jsx } from 'hono/jsx'
 import { Env } from '../interface'
-import { ArchivePage, ReleasePage } from '../components'
+import { /*ArchivePage,*/ ReleasePage } from '../components'
 
 const router = new Hono<{ Bindings: Env }>()
 
@@ -38,7 +38,8 @@ router.get('/', (c) => {
 })
 
 router.get('/archive', (c) => {
-    return c.html(<ArchivePage />)
+    return c.redirect('https://github.com/otentikapp/authenticator/releases', 302)
+    // return c.html(<ArchivePage />)
 })
 
 export default router
