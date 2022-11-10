@@ -1,22 +1,8 @@
 import { Hono } from 'hono'
 import { Env } from '../interface'
 import { prettyJSON } from '../middleware'
+import { getPlatformName } from '../utils/platform'
 import { getLatestRelease } from '../utils/repository'
-
-async function getTextFromStream(readableStream: any) {
-    let reader = readableStream.getReader()
-    let utf8Decoder = new TextDecoder()
-    let nextChunk
-
-    let resultStr = ''
-
-    while (!(nextChunk = await reader.read()).done) {
-        let partialData = nextChunk.value
-        resultStr += utf8Decoder.decode(partialData)
-    }
-
-    return resultStr
-}
 
 const router = new Hono<{ Bindings: Env }>()
 router.use('*', prettyJSON())
@@ -27,9 +13,11 @@ router.get('/', async (c) => {
 
     const files: any[] = await Promise.all(
         latest.assets.map(async (item): Promise<any> => {
+            const platform = getPlatformName(item.name)
             const sigUrl = `https://github.com/otentikapp/authenticator/releases/download/${latest.tag_name}/Authenticator.app.tar.gz.sig`
             const resp: any = await fetch(sigUrl)
-            const signature = await resp.text()
+            const sigStr = await resp.text()
+            const signature = platform === 'darwin' ? sigStr : undefined
 
             return {
                 name: item.name,
@@ -38,6 +26,7 @@ router.get('/', async (c) => {
                 download_count: item.download_count,
                 size: item.size,
                 signature,
+                platform,
             }
         })
     )

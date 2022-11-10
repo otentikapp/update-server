@@ -1,7 +1,7 @@
-import { extname } from 'path'
+import { getExtension } from '.'
 
-export function getPlatformName(fileName: string) {
-    const extension = extname(fileName).slice(1)
+export function getPlatformName(fileName: string): string {
+    const extension = getExtension(fileName)
 
     // OSX we should have our .app tar.gz
     if (
@@ -26,6 +26,5 @@ export function getPlatformName(fileName: string) {
         return 'appimage'
     }
 
-    const directCache = ['exe', 'dmg', 'rpm', 'deb']
-    return directCache.find((ext) => ext === extension) || false
+    return 'unknown'
 }

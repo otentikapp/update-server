@@ -17,19 +17,3 @@ export const aliases = {
     deb: ['debian'],
     rpm: ['fedora'],
 }
-
-export const isSupportedPlatform = (platform: string) => {
-    if (typeof aliases[platform] !== 'undefined') {
-        return platform
-    }
-
-    for (const guess of Object.keys(aliases)) {
-        const list = aliases[guess]
-
-        if (list.includes(platform)) {
-            return guess
-        }
-    }
-
-    return false
-}

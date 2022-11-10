@@ -1,3 +1,7 @@
+export function getExtension(filename: string) {
+    return filename.substring(filename.lastIndexOf('.') + 1)
+}
+
 export function getOS(userAgent: string): string {
     let osName = ''
     if (userAgent.search('Windows') !== -1) {
